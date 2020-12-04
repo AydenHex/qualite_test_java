@@ -16,9 +16,7 @@ class MoneyTest {
     private void generateGlobalMoney() {
         try {
             this.money = new Money(20, "EUR");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             fail(e.getMessage());
         }
     }
@@ -28,15 +26,34 @@ class MoneyTest {
         try {
             money = new Money(amount, currency);
             return money;
-            
-        }
-        catch (Exception e)
-        {
+
+        } catch (Exception e) {
             fail(e.getMessage());
             return e;
         }
     }
-    
+    @Test
+    void testSetAmountPositive() {
+        try {
+            this.money.setAmount(300);
+        } catch (Exception e) {
+            fail(e);
+        }
+        assertEquals(this.money.amount(), 300);
+    }
+
+    @Test
+    void testSetAmountNegative() {
+        Exception thrown = assertThrows(
+            Exception.class,
+            () -> this.money.setAmount(-100),
+            "Expected thrown exception, but it didn't"
+        );
+        
+        String expectedMessage = "Amount must be positive";
+        String actualMessage = thrown.getMessage();
+        assertSame(actualMessage, expectedMessage);
+    }
     @Test
     void testCreatePositiveAmountMoney() {
         try {

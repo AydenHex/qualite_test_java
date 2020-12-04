@@ -53,6 +53,12 @@
             <version>${junit}</version>
             <scope>test</scope>
         </dependency>
+    
+      <dependency>
+        <groupId>org.jsmart</groupId>
+        <artifactId>zerocode-rest-bdd</artifactId>
+        <version>1.2.7</version>
+      </dependency>
     </dependencies>
     
     <build>

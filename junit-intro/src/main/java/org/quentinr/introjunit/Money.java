@@ -15,6 +15,13 @@ class Money {
         this.fCurrency = currency;
     }
 
+    public void setAmount(int namount) throws Exception {
+        if (namount < 0) {
+            throw new Exception("Amount must be positive");
+        }
+        this.fAmount = namount;
+    }
+
     public int amount() {
         return this.fAmount;
     }
