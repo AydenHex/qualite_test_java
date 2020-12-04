@@ -56,13 +56,13 @@ public class MoneyBag {
                     total += entry.getValue().amount();
                     break;
                 case "USD":
-                    total += entry.getValue().amount() * 0.82;
+                    total += (entry.getValue().amount() * 0.82);
                     break;
                 case "CHF":
-                    total += entry.getValue().amount() * 0.92;
+                    total += (entry.getValue().amount() * 0.92);
                     break;
                 case "GBP":
-                    total += entry.getValue().amount() * 1.10;
+                    total += (entry.getValue().amount() * 1.10);
                     break;
             
                 default:
