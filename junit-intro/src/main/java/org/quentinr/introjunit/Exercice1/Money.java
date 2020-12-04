@@ -1,4 +1,4 @@
-package org.quentinr.introjunit;
+package org.quentinr.introjunit.Exercice1;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package org.quentinr.introjunit;
+package org.quentinr.introjunit.Exercice1;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
