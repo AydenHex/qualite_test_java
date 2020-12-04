@@ -88,7 +88,7 @@ class MoneyTest {
             "Expected thrown exception, but it didn't"
         );
         
-        String expectedMessage = "Currency must be string with 3 chars";
+        String expectedMessage = "Currency not managed";
         String actualMessage = thrown.getMessage();
         assertSame(actualMessage, expectedMessage);
     }

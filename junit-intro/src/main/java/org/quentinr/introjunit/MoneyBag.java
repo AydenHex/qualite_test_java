@@ -19,7 +19,7 @@ public class MoneyBag {
         if (this.moneys.containsKey(money.currency())) {
             this.moneys.get(money.currency()).add(money);
         } else {
-            this.moneys.put(money.currency(), money);
+            this.moneys.put(money.currency(), new Money(money.amount(), money.currency()));
         }
         return this;
     }
@@ -31,31 +31,49 @@ public class MoneyBag {
         return this;
     }
 
-    public MoneyBag subb(Money money) {
+    public MoneyBag subb(Money money) throws Exception {
+        if (this.moneys.containsKey(money.currency())){
+            this.moneys.get(money.currency()).add(-money.amount(), money.currency());
+        } else {
+            throw new Exception("Can't substract money if MoneyBag don't have this currency");
+        }
+
         return this;
     }
 
-    public static void main(String[] args) {
-        MoneyBag moneybag = new MoneyBag();
-        MoneyBag moneybag2 = new MoneyBag();
-        Money money, money2;
-        try {
-            money = new Money(150, "EUR");
-            money2 = new Money(250, "USD");
-            moneybag.add(money);
-            moneybag.add(money);
-            moneybag2.add(money2);
-            System.out.println(moneybag.moneys().get("EUR").amount());
-        } catch (Exception e) {
-            System.out.println();
+    public MoneyBag subb(MoneyBag moneyBag) throws Exception {
+        for (Map.Entry<String, Money> entry : moneyBag.moneys.entrySet()) {
+            this.subb(entry.getValue());
         }
-        try {
-            moneybag.add(moneybag2);
-            System.out.println(moneybag.moneys().get("USD").amount());
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        return this;
+    }
+
+    public Double normalize() {
+        Double total = 0.00;
+        for (Map.Entry<String, Money> entry : this.moneys.entrySet()) {
+            switch (entry.getKey()) {
+                case "EUR":
+                    total += entry.getValue().amount();
+                    break;
+                case "USD":
+                    total += entry.getValue().amount() * 0.82;
+                    break;
+                case "CHF":
+                    total += entry.getValue().amount() * 0.92;
+                    break;
+                case "GBP":
+                    total += entry.getValue().amount() * 1.10;
+                    break;
+            
+                default:
+                    break;
+            }
         }
+        return total;
+    }
+
+    public Boolean normalizeEqual(MoneyBag moneyBag) {
+        return (this.normalize().equals(moneyBag.normalize()));
     }
 
 }
