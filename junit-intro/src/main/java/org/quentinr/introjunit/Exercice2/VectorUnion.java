@@ -7,11 +7,15 @@ public class VectorUnion {
 
     /**
      * Ambiguité : 
-     *  - Type de vector ? Pour supprimer les dupplicata lors du merge
+     *  - Formulation : Fusion de deux listes mal formulé;
+     *  - Unicité ? : Si l'élement est existant dans a et b ? Duplication ou non ?
+     *  - Type  ? : Si l'élelement est présent dans a et B dans deux types différents ? Que fait-on ?
      * 
      * Specs modifiés :
-     * Ecrire une méthode de signature : public static Vector<String>(Vector<Object>, Vector<Object>) retournant
-     * un vecteurs d'objets sous format String (Afin de gérer les duplicas) les objets contenu dans A ou B.
+     * Ecrire une méthode de signature : public static Vector<Object>(Vector<Object>, Vector<Object>) retournant
+     * un vecteurs d'objets.
+     * Duplication possible
+     * Tout type accepté "Object"
      */
     public static Vector<Object> unionSet(Vector<Object> a, Vector<Object> b) {
         Vector<Object> merge = new Vector<Object>();
