@@ -5,15 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class MoneyTest {
 
     private Money money;
 
-    private void generateGlobalAmount(int amount, String currency) {
+    @BeforeEach
+    private void generateGlobalMoney() {
         try {
-            this.money = new Money(amount, currency);
+            this.money = new Money(20, "EUR");
         }
         catch (Exception e)
         {
@@ -21,7 +23,7 @@ class MoneyTest {
         }
     }
 
-    private Object generateSpecificAmount(int amount, String currency) {
+    private Object generateSpecificMoney(int amount, String currency) {
         Money money;
         try {
             money = new Money(amount, currency);
@@ -76,20 +78,17 @@ class MoneyTest {
 
     @Test
     void testGetAmount(){
-        this.generateGlobalAmount(150, "EUR");
-        assertEquals(this.money.amount(), 150);
+        assertEquals(this.money.amount(), 20);
     }
 
     @Test
     void testGetCurrency(){
-        this.generateGlobalAmount(150, "EUR");
         assertSame(this.money.currency(), "EUR");
     }
 
     @Test
     void addSameCurrencyPositiveAmountByMoney() {
-        this.generateGlobalAmount(20, "EUR");
-        Money moneyAdd = (Money) this.generateSpecificAmount(20, "EUR");
+        Money moneyAdd = (Money) this.generateSpecificMoney(20, "EUR");
         try {
             this.money.add(moneyAdd);
         } catch (Exception e) {
@@ -100,7 +99,6 @@ class MoneyTest {
     }
     @Test
     void addDifferentCurrencyPositiveMoney() {
-        this.generateGlobalAmount(20, "EUR");
         Exception thrown = assertThrows(
             Exception.class,
             () -> this.money.add(50, "USD"),
@@ -113,7 +111,6 @@ class MoneyTest {
 
     @Test
     void addSameCurrencyPositiveAmout() {
-        this.generateGlobalAmount(20, "EUR");
         try {
             this.money.add(20, "EUR");
         } catch (Exception e) {
@@ -123,7 +120,6 @@ class MoneyTest {
     }
     @Test
     void addDifferentCurrencyPositiveAmout() {
-        this.generateGlobalAmount(20, "EUR");
         Exception thrown = assertThrows(
             Exception.class,
             () -> this.money.add(50, "USD"),
@@ -136,7 +132,6 @@ class MoneyTest {
 
     @Test
     void addDifferentCurrencyNegativeAmountNegativeResult() {
-        this.generateGlobalAmount(20, "EUR");
         Exception thrown = assertThrows(
             Exception.class,
             () -> this.money.add(-50, "EUR"),
