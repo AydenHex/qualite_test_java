@@ -18,7 +18,7 @@ public class VectorUnion {
 
         merge.addAll(a);
         merge.addAll(b);
-        merge.stream().collect(Collectors.toCollection(Vector::new));
+        merge.stream().distinct().collect(Collectors.toCollection(Vector::new));
         return merge;
     }
 
