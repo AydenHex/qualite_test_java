@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.Vector;
 
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 
 /** Tests for VectorUnion class
  * @author Quentin ROYER
