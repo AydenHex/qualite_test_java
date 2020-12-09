@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterAll;
@@ -18,12 +17,12 @@ import org.junit.jupiter.api.Test;
 public class SquareTest {
 
     private static Map<Integer, Double> sampleResult = new HashMap<Integer, Double>();
-    private List<Double> result;
+    private Map<Integer, Double> result;
 
     @BeforeAll
     public static void populateSampleResult() {
-        sampleResult.put(0, 2.0);
-        sampleResult.put(7, 3.3166247903554);
+        sampleResult.put(4, 2.0);
+        sampleResult.put(11, 3.3166247903554);
     }
 
     @AfterAll
@@ -43,14 +42,14 @@ public class SquareTest {
         // Test if the array sized correctly
         assertEquals(59, this.result.size());
         // Test some sqrt values in result
-        assertEquals(sampleResult.get(0), this.result.get(0));
-        assertEquals(sampleResult.get(7), this.result.get(7));
+        assertEquals(sampleResult.get(4), this.result.get(4));
+        assertEquals(sampleResult.get(11), this.result.get(11));
     }
 
     @Test
     public void squareAGreaterThanB() {
         Exception e = assertThrows(
-            Exception.class,
+            IllegalArgumentException.class,
             () -> Square.getSquares(62, 4),
             "Should throw exception A greater than B"
         );
@@ -63,7 +62,7 @@ public class SquareTest {
     @Test
     public void squareNullParameters() {
         Exception e = assertThrows(
-            Exception.class,
+            IllegalArgumentException.class,
             () -> Square.getSquares(0, 0),
             "Parameters should be positive integer greater than 0"
         );
@@ -76,7 +75,7 @@ public class SquareTest {
     @Test
     public void squareNegativeParameters() {
         Exception e = assertThrows(
-            Exception.class,
+            IllegalArgumentException.class,
             () -> Square.getSquares(-10, -5),
             "Parameters should be positive integer greater than 0"
         );
@@ -90,7 +89,7 @@ public class SquareTest {
     @Test
     public void squareBNegativeParameter() {
         Exception e = assertThrows(
-            Exception.class,
+            IllegalArgumentException.class,
             () -> Square.getSquares(50, -10),
             "Parameters should be positive integer greater than 0"
         );
@@ -107,6 +106,6 @@ public class SquareTest {
 
     @Test
     public void performanceTestLong() {
-        assertTimeout(ofMillis(750), () -> Square.getSquares(1, 10000000));
+        assertTimeout(ofMillis(1250), () -> Square.getSquares(1, 10000000));
     }
 }
