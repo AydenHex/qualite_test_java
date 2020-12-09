@@ -10,6 +10,11 @@ import java.util.Vector;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 
+/** Tests for VectorUnion class
+ * @author Quentin ROYER
+ * @author https://github.com/aydenhex
+ * @version 1.0
+*/
 public class VectorUnionTest {
 
     Vector<Object> stringVector = new Vector<Object>() {
@@ -48,6 +53,10 @@ public class VectorUnionTest {
     };
 
     @Test
+    /**
+     * Test if the usage of unionSet static method work and not throw exceptions.
+     * Use two Vector<Object> with Integer and String.
+     */
     public void testMergeOk() {
         Vector <Object> result;
         result = assertDoesNotThrow(() -> VectorUnion.unionSet(intVector, intVector2));
@@ -55,6 +64,10 @@ public class VectorUnionTest {
     }
 
     @Test
+    /**
+     * Test if parameters vectors have an size greater than 0
+     * Use two Vector<Object> empty
+     */
     public void testMergeZeroSizeParameters() {
         Exception thrown = assertThrows(
             Exception.class,
