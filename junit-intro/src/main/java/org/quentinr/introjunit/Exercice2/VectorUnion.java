@@ -6,47 +6,28 @@ import java.util.stream.Collectors;
 public class VectorUnion {
 
     /**
-     * Ambiguité : 
-     *  - Formulation : Fusion de deux listes mal formulé;
-     *  - Unicité ? : Si l'élement est existant dans a et b ? Duplication ou non ?
-     *  - Type  ? : Si l'élelement est présent dans a et B dans deux types différents ? Que fait-on ?
+     * Ambiguité : - Ou excelusif ? Ou inclusif ? - Duplication si élément présent
+     * dans A et B ? - Sensibilité au type ? - Paramètre non nuls ? - Paramètre non
+     * vide
      * 
-     * Specs modifiés :
-     * Ecrire une méthode de signature : public static Vector<Object>(Vector<Object>, Vector<Object>) retournant
-     * un vecteurs d'objets.
-     * Duplication possible
-     * Tout type accepté "Object"
+     * Specs modifiés : Ecrire une méthode de signature : public static
+     * Vector<Object>(Vector<Object>, Vector<Object>) avec en paramètre des vecteurs
+     * non nuls. On inclura toutes les valeurs des deux vecteurs avec
+     * possibilité de duplication.
+     * 
+     * @throws Exception
+     * 
      */
-    public static Vector<Object> unionSet(Vector<Object> a, Vector<Object> b) {
+    public static Vector<Object> unionSet(Vector<Object> a, Vector<Object> b) throws Exception {
         Vector<Object> merge = new Vector<Object>();
 
+        if (a.size() == 0 || b.size() == 0) {
+            throw new Exception("Can't merge empty vectors");
+        }
         merge.addAll(a);
         merge.addAll(b);
         merge.stream().distinct().collect(Collectors.toCollection(Vector::new));
         return merge;
-    }
-
-    public static void main(String[] args) {
-        Vector<Object> test = new Vector<Object>() {
-            private static final long serialVersionUID = 1L;
-
-            {
-                add(1);
-                add("1");
-            }
-        };
-        Vector<Object> test2 = new Vector<Object>() {
-            private static final long serialVersionUID = 1L;
-
-            {
-                add(1.00);
-            }
-        };
-
-        Vector<Object> test3 = VectorUnion.unionSet(test, test2);
-
-        System.out.println(test3.size());
-        System.out.println(test3);
     }
 
 }
