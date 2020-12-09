@@ -86,6 +86,20 @@ public class SquareTest {
         assertEquals(expectedMessage, testMessage);
     }
 
+
+    @Test
+    public void squareBNegativeParameter() {
+        Exception e = assertThrows(
+            Exception.class,
+            () -> Square.getSquares(50, -10),
+            "Parameters should be positive integer greater than 0"
+        );
+
+        String testMessage = e.getMessage();
+        String expectedMessage = "Parameters should be positive integer greater than 0";
+        assertEquals(expectedMessage, testMessage);
+    }
+
     @Test
     public void performanceTestShort() {
         assertTimeout(ofMillis(5), () -> Square.getSquares(1, 20));

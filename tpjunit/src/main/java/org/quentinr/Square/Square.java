@@ -10,6 +10,11 @@ import java.util.List;
 */
 public class Square {
     
+
+    /**
+     * Unused constructor - Utilities class - Only for tests
+     */
+    private Square() {}
     /** 
      * Allows to get an Array which contains each Sqrt values for integer between A and B;
      * @param A: Represent an Integer smaller than B
