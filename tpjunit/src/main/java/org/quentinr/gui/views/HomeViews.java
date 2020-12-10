@@ -9,9 +9,11 @@ public class HomeViews extends JFrame{
     //MainContent
     private JPanel mainPan,btnPan,valuesPan;
     
-    private JLabel resultLabel, value1Label, value2Label;
+    private JLabel value1Label, value2Label;
+    private JTextArea result;
     private JTextField value1, value2;
     private JButton CalculateSquare;
+    private JScrollPane resultScroll;
 
 
     public HomeViews(String titre) {
@@ -42,7 +44,10 @@ public class HomeViews extends JFrame{
         value1=new JTextField(10);
         value2Label =new JLabel("Value 2 :");
         value2=new JTextField(10);
-        resultLabel=new JLabel("Test");
+        result=new JTextArea("En attent des resultats...", 15, 80);
+        result.setLineWrap(true);
+        result.setWrapStyleWord(true);
+        resultScroll = new JScrollPane(result);
         
         // Set buttons
         CalculateSquare =new JButton();
@@ -50,7 +55,7 @@ public class HomeViews extends JFrame{
 
         // adding principals features
         btnPan.add(CalculateSquare);
-        mainPan.add(resultLabel, BorderLayout.CENTER);
+        mainPan.add(resultScroll, BorderLayout.CENTER);
             // adding valuesPan features
         valuesPan.add(value1Label);
         valuesPan.add(value1);
@@ -88,6 +93,10 @@ public class HomeViews extends JFrame{
 
     public void setValue2(JTextField value2) {
         this.value2 = value2;
+    }
+
+    public JTextArea getResultLabel() {
+        return this.result;
     }
 
 
