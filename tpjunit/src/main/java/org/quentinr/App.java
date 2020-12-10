@@ -20,7 +20,7 @@ public class App {
                     Map<Integer, Double> result = calculer(A, B);
                     test.getResultLabel().setText(buildResult(result));
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    test.getResultLabel().setText("Excepetion : " + e.getMessage());
                 }
             }
         });
